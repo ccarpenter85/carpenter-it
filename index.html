@@ -48,6 +48,19 @@
       font-size: 1.25rem;
       color: #555;
     }
+    .header-flex {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 16px;
+  text-align: left;
+}
+
+.logo {
+  height: 64px;
+  width: 64px;
+  object-fit: contain;
+}
 
     /* Sections */
     section {
@@ -151,10 +164,13 @@
 
   <div class="container">
 
-    <header>
-      <h1>Carpenter IT</h1>
-      <p>Reliable, Modern Information Technology Testing Solutions</p>
-    </header>
+    <header class="header-flex">
+  <img src="/favicon-512-transparent.png" alt="Carpenter IT Logo" class="logo" />
+  <div>
+    <h1>Carpenter IT</h1>
+    <p>Reliable, Modern Information Technology Testing Solutions</p>
+  </div>
+</header>
 
     <section id="about">
       <h2>About Us</h2>
