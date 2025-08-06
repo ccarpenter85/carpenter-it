@@ -51,10 +51,12 @@
     .header-flex {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center; /* Center the logo + text */
   gap: 16px;
+  flex-wrap: wrap; /* Makes it mobile responsive */
   text-align: left;
 }
+
 
 .logo {
   height: 64px;
@@ -164,11 +166,13 @@
 
   <div class="container">
 
-    <header class="header-flex">
-  <img src="/favicon-512-transparent.png" alt="Carpenter IT Logo" class="logo" />
-  <div>
-    <h1>Carpenter IT</h1>
-    <p>Reliable, Modern Information Technology Testing Solutions</p>
+    <header>
+  <div class="header-flex">
+    <img src="/favicon-512-transparent.png" alt="Carpenter IT Logo" class="logo" />
+    <div>
+      <h1>Carpenter IT</h1>
+      <p>Reliable, Modern Information Technology Testing Solutions</p>
+    </div>
   </div>
 </header>
 
