@@ -2,48 +2,50 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Carpenter IT</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Carpenter IT | Professional Technology Solutions</title>
   <style>
-    /* Reset & Base */
+    /* Base Reset */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
     body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #0f172a, #1e293b);
-      color: #f1f5f9;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom, #0f172a, #1e293b);
+      color: #e2e8f0;
       line-height: 1.6;
     }
     a {
       color: #38bdf8;
       text-decoration: none;
+      transition: color 0.3s ease;
     }
     a:hover {
-      text-decoration: underline;
+      color: #0ea5e9;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 2rem;
     }
 
     /* Header */
     header {
-      display: flex;
-      align-items: center; /* vertically center logo with text */
-      justify-content: center; /* center whole block horizontally */
+      text-align: center;
       padding: 3rem 1rem 2rem;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      flex-wrap: wrap; /* so it stacks on mobile */
     }
     header .logo {
-      max-width: 120px;
-      margin-right: 1.5rem;
+      max-width: 150px;
+      margin-bottom: 1rem;
       transition: transform 0.3s ease;
     }
     header .logo:hover {
       transform: scale(1.05);
-    }
-    header .text {
-      text-align: left;
     }
     header h1 {
       font-size: 3rem;
@@ -56,36 +58,90 @@
       color: #94a3b8;
     }
 
-    /* Mobile tweaks */
-    @media (max-width: 600px) {
-      header {
-        flex-direction: column;
-        text-align: center;
-      }
-      header .logo {
-        margin: 0 0 1rem 0;
-      }
-      header .text {
-        text-align: center;
-      }
-    }
-
-    /* Main content */
-    main {
-      max-width: 1000px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
+    /* Sections */
     section {
-      margin-bottom: 2rem;
-      background: rgba(255, 255, 255, 0.02);
-      padding: 1.5rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      margin: 3rem 0;
     }
     section h2 {
-      margin-bottom: 1rem;
       color: #38bdf8;
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+      border-left: 5px solid #38bdf8;
+      padding-left: 10px;
+    }
+    section p {
+      color: #cbd5e1;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Services grid */
+    ul.services {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    ul.services li {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 1.5rem;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    ul.services li:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    }
+    ul.services li h3 {
+      color: #f8fafc;
+      margin-bottom: 0.75rem;
+      font-size: 1.3rem;
+    }
+
+    /* Contact form */
+    form {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 2rem;
+      border-radius: 10px;
+      max-width: 450px;
+      margin: 0 auto;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    form label {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      display: block;
+      color: #f1f5f9;
+    }
+    form input, form textarea {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1.2rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.05);
+      color: #e2e8f0;
+      font-size: 1rem;
+    }
+    form input:focus, form textarea:focus {
+      outline: none;
+      border-color: #38bdf8;
+    }
+    form button {
+      background: #38bdf8;
+      color: #0f172a;
+      font-weight: bold;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    form button:hover {
+      background: #0ea5e9;
     }
 
     /* Footer */
@@ -93,47 +149,103 @@
       text-align: center;
       padding: 2rem 1rem;
       font-size: 0.9rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
       color: #94a3b8;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 3rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2.2rem;
+      }
+      section h2 {
+        font-size: 1.5rem;
+      }
     }
   </style>
 </head>
 <body>
-  <header>
-    <img src="LOGO.PNG" alt="Carpenter IT Logo" class="logo">
-    <div class="text">
+
+  <div class="container">
+    <header>
+      <img src="LOGO.PNG" alt="Carpenter IT Logo" class="logo">
       <h1>Carpenter IT</h1>
       <p>Reliable, Modern Information Technology Testing Solutions</p>
-    </div>
-  </header>
+    </header>
 
-  <main>
     <section id="about">
       <h2>About Us</h2>
       <p>
-        At Carpenter IT, we specialize in delivering cutting-edge PC builds and IT solutions tailored to your needs. Whether you're looking for a high-performance gaming rig, a reliable workstation, or network setup and diagnostics, our mission is to provide technology you can trust.
+        At Carpenter IT, we specialize in comprehensive testing services for your technology infrastructure. From software quality assurance to network security assessments, we ensure your systems perform flawlessly and securely.
       </p>
     </section>
 
     <section id="services">
       <h2>Our Services</h2>
-      <ul>
-        <li>Custom PC Builds – designed for performance, reliability, and your exact needs.</li>
-        <li>IT Consulting – helping you choose the right technology for your goals.</li>
-        <li>Network Installation & Support – secure and efficient setup for home or office.</li>
-        <li>Diagnostics & Repairs – fast, accurate, and dependable service.</li>
+      <ul class="services">
+        <li>
+          <h3>Software Testing</h3>
+          <p>Functional, regression, and automated testing to guarantee your software meets all requirements.</p>
+        </li>
+        <li>
+          <h3>Network Testing</h3>
+          <p>Evaluate network performance, security, and resilience under real-world conditions.</p>
+        </li>
+        <li>
+          <h3>Performance Testing</h3>
+          <p>Stress, load, and scalability testing to ensure your applications can handle peak demand.</p>
+        </li>
+        <li>
+          <h3>PC Building</h3>
+          <p>Custom-built PCs designed for power, performance, and your exact needs — from high-speed gaming rigs to reliable workstations.</p>
+        </li>
+        <li>
+          <h3>Example Jobs & Rates</h3>
+          <p>
+            Basic PC cleanup / tune-up: $50/hr<br>
+            Virus removal: $60/hr<br>
+            Home Wi-Fi troubleshooting: $55–$65/hr<br>
+            Smart home setup (cameras, Alexa): $60–$75/hr<br>
+            Network setup / router config: $60/hr<br>
+            On-site tech support (printers, hardware): $65
+          </p>
+        </li>
+        <li>
+          <h3>Optional Add-ons</h3>
+          <p>
+            • Monthly service plans (remote support + 1 onsite visit per quarter)<br>
+            • Hardware recommendations and install service packages
+          </p>
+        </li>
       </ul>
     </section>
 
     <section id="contact">
       <h2>Contact Us</h2>
-      <p>Email: <a href="mailto:info@carpenterit.com">info@carpenterit.com</a></p>
-      <p>Phone: (555) 123-4567</p>
+      <form action="https://formsubmit.co/carpenterit993@gmail.com" method="POST">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Your full name" required />
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required />
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" placeholder="Write your message here" required></textarea>
+
+        <!-- Hidden fields -->
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="https://carpenter-it.com/thanks.html">
+
+        <button type="submit">Send Message</button>
+      </form>
     </section>
-  </main>
+  </div>
 
   <footer>
     &copy; 2025 Carpenter IT. All rights reserved.
   </footer>
+
 </body>
 </html>
