@@ -54,7 +54,7 @@
     .builds-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
     @media(max-width:1024px){.builds-grid{grid-template-columns:repeat(2,1fr);}}
     @media(max-width:640px){.builds-grid{grid-template-columns:1fr;}}
-    .build-card{background:var(--panel);border-radius:var(--radius);padding:16px;border:1px solid rgba(255,255,255,.06);transition:transform .25s ease, box-shadow .25s ease;}
+    .build-card{background:var(--panel);border-radius:var(--radius);padding:16px;border:1px solid rgba(255,255,255,.06);transition:transform .25s ease, box-shadow .25s ease;display:block;}
     .build-card:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 16px 32px rgba(0,0,0,.45);}
     .build-card h3{margin:10px 0 6px;}
     .build-card ul{padding-left:18px;color:var(--muted);margin:0;}
@@ -63,7 +63,7 @@
     /* Back Button */
     .back-btn{display:inline-block;margin-bottom:24px;padding:10px 16px;background:linear-gradient(90deg,var(--accent),#39f0ff);color:#0b0f12;font-weight:700;border-radius:999px;box-shadow:0 0 0 4px var(--ring), var(--shadow);}
     .back-btn:hover{filter:brightness(1.1);}
-    
+
     footer{background:#090c0f;padding:60px 20px;color:var(--muted);margin-top:40px;border-top:2px solid rgba(0,136,255,0.15);}
     footer .cols{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;}
     footer h5{margin:0 0 12px;color:var(--text);font-size:16px;font-weight:600;}
@@ -110,7 +110,6 @@
       <!-- Stealth mATX -->
       <a href="pc-builds.html" class="build-card">
         <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1200&auto=format&fit=crop" alt="Stealth mATX Build" />
-        <div class="overlay">View Specs</div>
         <h3>Stealth mATX</h3>
         <ul>
           <li>Air cooled</li>
@@ -123,13 +122,11 @@
           <li>Thermalright X5 Fan, 120mm</li>
           <li>Supernova EVGA 850 G2 Power Supply</li>
         </ul>
-      </div>
+      </a>
 
       <!-- Budget Build -->
-    <a href="pc-builds.html" class="build-card">
-      <div class="build-card">
+      <a href="pc-builds.html" class="build-card">
         <img src="WhitePC.jpg" alt="Budget Build" />
-        <div class="overlay">View Specs</div>
         <h3>Budget Build</h3>
         <ul>
           <li>ASUS A21 Micro-ATX Case White Edition</li>
@@ -142,13 +139,11 @@
           <li>Thermalright X5 Fan, 120mm</li>
           <li>Supernova EVGA 850 G2 Power Supply</li>
         </ul>
-      </div>
+      </a>
 
       <!-- Creator 240 -->
-    <a href="pc-builds.html" class="build-card">
-      <div class="build-card">
+      <a href="pc-builds.html" class="build-card">
         <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=1200&auto=format&fit=crop" alt="Creator 240" />
-        <div class="overlay">View Specs</div>
         <h3>Creator 240</h3>
         <ul>
           <li>240mm AIO</li>
@@ -160,7 +155,7 @@
           <li>RGB Cooling Fans</li>
           <li>Supernova EVGA 850 G2 Power Supply</li>
         </ul>
-      </div>
+      </a>
     </div>
   </section>
 
