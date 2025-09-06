@@ -30,7 +30,7 @@
     .container{max-width:var(--maxw);margin:0 auto;padding:0 20px;}
 
     /* Header */
-    header{position:sticky;top:0;z-index:50;background:rgba(11,15,18,.8);backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid rgba(255,255,255,.06);}
+    header{position:sticky;top:0;z-index:100;background:rgba(11,15,18,.9);backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid rgba(255,255,255,.06);}
     .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;height:66px;}
     .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.2px;}
     .brand img{height:40px;width:auto;}
@@ -43,7 +43,7 @@
     @media (max-width:900px){.nav-links{display:none;}.menu-btn{display:inline-flex;gap:8px;align-items:center;}}
 
     /* Drawer */
-    .drawer{position:fixed;inset:0 0 0 auto;width:min(88vw,380px);background:#0e1419;transform:translateX(102%);transition:transform .25s ease;box-shadow:-30px 0 60px rgba(0,0,0,.45);z-index:9999;}
+    .drawer{position:fixed;inset:0 0 0 auto;width:min(88vw,380px);background:#0e1419;transform:translateX(102%);transition:transform .25s ease;box-shadow:-30px 0 60px rgba(0,0,0,.45);z-index:200;}
     .drawer.open{transform:translateX(0);}
     .drawer .inner{padding:22px;}
     .drawer a{display:block;padding:14px 10px;border-bottom:1px solid rgba(255,255,255,.06);transition:all .2s;}
@@ -59,6 +59,21 @@
     .build-card h3{margin:10px 0 6px;}
     .build-card ul{padding-left:18px;color:var(--muted);margin:0;}
     .build-card img{height:200px;object-fit:cover;margin-bottom:12px;}
+
+    /* Back button */
+    .back-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 18px;
+      background: var(--accent);
+      color: white !important;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .back-btn:hover {
+      background: var(--accent-2);
+    }
 
     footer{background:#090c0f;padding:60px 20px;color:var(--muted);margin-top:40px;border-top:2px solid rgba(0,136,255,0.15);}
     footer .cols{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;}
@@ -79,10 +94,10 @@
         Carpenter IT
       </a>
       <nav class="nav-links" aria-label="Primary">
-        <a href="index.html#services">Services</a>
+        <a href="#services">Services</a>
         <a href="pc-builds.html">PC Builds</a>
-        <a href="index.html#support">Support</a>
-        <a class="cta" href="index.html#contact">Get a Quote</a>
+        <a href="#support">Support</a>
+        <a class="cta" href="#contact">Get a Quote</a>
       </nav>
       <button class="menu-btn" aria-expanded="false" aria-controls="drawer" id="menuBtn">Menu ▾</button>
     </div>
@@ -90,10 +105,10 @@
 
   <aside class="drawer" id="drawer" aria-hidden="true">
     <div class="inner">
-      <a href="index.html#services" onclick="closeDrawer()">Services</a>
+      <a href="#services" onclick="closeDrawer()">Services</a>
       <a href="pc-builds.html" onclick="closeDrawer()">PC Builds</a>
-      <a href="index.html#support" onclick="closeDrawer()">Support</a>
-      <a class="cta" href="index.html#contact" onclick="closeDrawer()">Get a Quote</a>
+      <a href="#support" onclick="closeDrawer()">Support</a>
+      <a class="cta" href="#contact" onclick="closeDrawer()">Get a Quote</a>
     </div>
   </aside>
 
@@ -152,6 +167,9 @@
         </ul>
       </div>
     </div>
+
+    <!-- Back button -->
+    <a href="index.html" class="back-btn">← Back to Home</a>
   </section>
 
   <!-- Footer -->
