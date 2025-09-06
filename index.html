@@ -14,56 +14,106 @@
       --panel:#10161b;
       --muted:#9aa;
       --text:#e7f2f2;
-      --accent:#0088FF;
-      --accent-2:#005FCC;
-      --ring: rgba(0,136,255,0.35);
+      --accent:#0088FF;    /* changed green to blue */
+      --accent-2:#005FCC;  /* darker blue variant */
+      --ring: rgba(0,136,255,0.35); /* blue glow */
       --shadow: 0 10px 25px rgba(0,0,0,.3);
       --radius: 16px;
+      --radius-lg: 22px;
       --maxw: 1200px;
     }
 
     *{box-sizing:border-box;}
     html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;scroll-behavior:smooth;}
-    img{max-width:100%;display:block;border-radius:var(--radius);}
+    img{max-width:100%;display:block;}
     a{color:inherit;text-decoration:none;}
     .container{max-width:var(--maxw);margin:0 auto;padding:0 20px;}
 
     /* Header */
-    header{position:sticky;top:0;z-index:100;background:rgba(11,15,18,.9);backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid rgba(255,255,255,.06);}
+    header{position:sticky;top:0;z-index:50;background:rgba(11,15,18,.8);backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid rgba(255,255,255,.06);}
     .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;height:66px;}
     .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.2px;}
-    .brand img{height:40px;width:auto;}
+    .brand img{height:40px;width:auto;} /* logo size */
     .nav-links{display:flex;gap:22px;align-items:center;}
     .nav-links a{opacity:.9;transition:all .2s;}
     .nav-links a:hover{color:var(--accent);}
     .cta{padding:10px 14px;border-radius:999px;background:linear-gradient(90deg,var(--accent),#39f0ff);color:#0b0f12;font-weight:700;box-shadow:0 0 0 4px var(--ring), var(--shadow);transition:all .25s ease;}
     .cta:hover{transform:translateY(-2px);filter:brightness(1.1);}
+
+    /* Mobile nav */
     .menu-btn{display:none;border:1px solid rgba(255,255,255,.12);padding:8px 12px;border-radius:10px;}
-    @media (max-width:900px){.nav-links{display:none;}.menu-btn{display:inline-flex;gap:8px;align-items:center;}}
+    @media (max-width: 900px){
+      .nav-links{display:none;}
+      .menu-btn{display:inline-flex;gap:8px;align-items:center;}
+    }
 
     /* Drawer */
-    .drawer{position:fixed;inset:0 0 0 auto;width:min(88vw,380px);background:#0e1419;transform:translateX(102%);transition:transform .25s ease;box-shadow:-30px 0 60px rgba(0,0,0,.45);z-index:200;}
-    .drawer.open{transform:translateX(0);}
-    .drawer .inner{padding:22px;}
-    .drawer a{display:block;padding:14px 10px;border-bottom:1px solid rgba(255,255,255,.06);transition:all .2s;}
-    .drawer a:hover{color:var(--accent);}
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: auto;
+  width: min(88vw, 380px);
+  background: #0e1419;
+  transform: translateX(102%);
+  transition: transform .25s ease;
+  box-shadow: -30px 0 60px rgba(0,0,0,.45);
+  z-index: 99999; /* ✅ force above header + content */
+}
 
     /* Hero */
-    .hero{padding:120px 20px;text-align:center;}
-    .hero h1{font-size:56px;margin:0 0 20px;}
-    .hero p{color:var(--muted);font-size:20px;margin-bottom:28px;}
+    .hero{position:relative;overflow:hidden;background: radial-gradient(circle at top left, rgba(0,136,255,0.05), transparent 60%), linear-gradient(to bottom, #0d1318, #0b0f12);}
+    .hero .container{display:grid;grid-template-columns:1fr;gap:28px;align-items:center;padding:100px 20px;}
+    .hero h1{font-size:clamp(40px,6vw,64px);line-height:1.1;margin:0 0 18px;font-weight:800;letter-spacing:-0.5px;}
+    .hero p{color:var(--muted);font-size:clamp(15px,2vw,18px);line-height:1.6;}
+    .hero .actions{display:flex;gap:14px;margin-top:22px;flex-wrap:wrap;}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:transparent;transition:all .25s ease;}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),#39f0ff);color:#0b0f12;border:none;font-weight:800;}
+    .btn:hover{border-color:rgba(255,255,255,.22);transform:translateY(-2px);}
+    .glow{position:absolute;inset:auto -20% -35% -20%;height:420px;background:radial-gradient(60% 60% at 50% 0%,var(--ring),transparent 60%);filter:blur(60px);opacity:.7;pointer-events:none;}
+
+    /* Tiles / Services */
+    .tiles{padding:50px 0 20px;}
+    .tiles .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+    @media (max-width: 1024px){.tiles .grid{grid-template-columns:repeat(2,1fr);}}
+    @media (max-width: 640px){.tiles .grid{grid-template-columns:1fr;}}
+    .card{background:var(--panel);border-radius:var(--radius);padding:22px;border:1px solid rgba(255,255,255,.06);transition:transform .25s ease, box-shadow .25s ease, opacity .6s, transform .6s;opacity:0;transform:translateY(20px);}
+    .card.visible{opacity:1;transform:translateY(0);}
+    .card:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 16px 32px rgba(0,0,0,.45);}
+    .card h3{margin:10px 0 6px;}
+    .card .icon{font-size:28px;color:var(--accent);margin-bottom:12px;display:inline-block;}
 
     /* Featured Builds */
-    .featured{padding:70px 20px;}
-    .featured h2{font-size:32px;margin-bottom:20px;}
-    .builds-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
-    @media(max-width:1024px){.builds-grid{grid-template-columns:repeat(2,1fr);}}
-    @media(max-width:640px){.builds-grid{grid-template-columns:1fr;}}
-    .build-card{background:var(--panel);border-radius:var(--radius);padding:16px;border:1px solid rgba(255,255,255,.06);transition:transform .25s ease, box-shadow .25s ease;}
-    .build-card:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 16px 32px rgba(0,0,0,.45);}
-    .build-card h3{margin:10px 0 6px;}
-    .build-card ul{padding-left:18px;color:var(--muted);margin:0;}
-    .build-card img{height:200px;object-fit:cover;margin-bottom:12px;}
+    .showcase{padding:70px 0;}
+    .show-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+    .prod{position:relative;background:linear-gradient(180deg,#11171d,#0c1116);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;opacity:0;transform:translateY(20px);transition:all .6s;}
+    .prod.visible{opacity:1;transform:translateY(0);}
+    .prod img{
+      aspect-ratio:16/9;
+      object-fit:cover;
+      transform: scale(1.2);
+      transition: transform 0.3s ease;
+    }
+    .prod:hover img{transform: scale(1.25);}
+    .prod .meta{padding:14px 16px;display:flex;justify-content:space-between;align-items:center;}
+    .prod .meta h4{margin:0;}
+    .prod .pill{font-size:12px;border:1px solid rgba(255,255,255,.12);padding:6px 10px;border-radius:999px;color:var(--muted);}
+    .prod::after{content:"View Specs";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.55);color:var(--accent);font-weight:600;opacity:0;transition:opacity .3s ease;}
+    .prod:hover::after{opacity:1;}
+    @media (max-width: 900px){.show-grid{grid-template-columns:1fr;}}
+
+    /* Support strip */
+    .support{background:linear-gradient(90deg,rgba(0,136,255,.08),transparent);border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);}
+    .support .bar{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;padding:20px 0;}
+    .support .bar span{color:var(--muted);}
+
+    /* Contact Form */
+    .contact-section{padding:70px 0;}
+    .contact-form{display:flex;flex-direction:column;gap:14px;max-width:450px;margin:0 auto;}
+    .contact-form input, .contact-form textarea{padding:12px;border-radius:6px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:var(--text);}
+    .contact-form button{padding:12px 18px;border:none;border-radius:6px;background:var(--accent);color:#0b0f12;font-weight:700;cursor:pointer;transition:all .25s;}
+    .contact-form button:hover{background:var(--accent-2);transform:translateY(-2px);}
 
     /* Footer */
     footer{background:#090c0f;padding:60px 20px;color:var(--muted);margin-top:40px;border-top:2px solid rgba(0,136,255,0.15);}
@@ -72,24 +122,24 @@
     footer a{display:block;padding:6px 0;color:var(--muted);}
     footer a:hover{color:var(--accent);}
     footer p{font-size:14px;line-height:1.6;}
-    @media(max-width:900px){footer .cols{grid-template-columns:1fr 1fr;}}
-    @media(max-width:540px){footer .cols{grid-template-columns:1fr;}}
+    @media (max-width: 900px){footer .cols{grid-template-columns:1fr 1fr;}}
+    @media (max-width: 540px){footer .cols{grid-template-columns:1fr;}}
   </style>
 </head>
 <body>
-  <!-- Header -->
   <header>
     <div class="container nav">
-      <a class="brand" href="index.html">
-        <img src="images/LOGO.PNG" alt="Carpenter IT Logo" />
-        Carpenter IT
-      </a>
+      <a class="brand" href="#">
+  <img src="images/LOGO.PNG" alt="Carpenter IT Logo" style="height:40px; width:auto;" />
+  Carpenter IT
+</a>
       <nav class="nav-links" aria-label="Primary">
         <a href="#services">Services</a>
         <a href="pc-builds.html">PC Builds</a>
         <a href="#support">Support</a>
-        <a class="cta" href="#contact">Get a Quote</a>
+        <a href="#about">About</a>
       </nav>
+      <a class="cta" href="#contact">Get a Quote</a>
       <button class="menu-btn" aria-expanded="false" aria-controls="drawer" id="menuBtn">Menu ▾</button>
     </div>
   </header>
@@ -97,59 +147,97 @@
   <aside class="drawer" id="drawer" aria-hidden="true">
     <div class="inner">
       <a href="#services" onclick="closeDrawer()">Services</a>
-      <a href="pc-builds.html" onclick="closeDrawer()">PC Builds</a>
+      <a href="#builds" onclick="closeDrawer()">PC Builds</a>
       <a href="#support" onclick="closeDrawer()">Support</a>
-      <a class="cta" href="#contact" onclick="closeDrawer()">Get a Quote</a>
+      <a href="#about" onclick="closeDrawer()">About</a>
+      <a href="#contact" class="cta" style="display:inline-block;margin-top:14px" onclick="closeDrawer()">Get a Quote</a>
     </div>
   </aside>
 
   <!-- Hero -->
   <section class="hero">
-    <h1>Welcome to Carpenter IT</h1>
-    <p>Reliable, modern, and professional IT services and PC builds for every need.</p>
-    <a href="pc-builds.html" class="cta">View PC Builds</a>
+    <div class="glow" aria-hidden="true"></div>
+    <div class="container">
+      <div>
+        <h1>Reliable, Modern, <span style="color:var(--accent)"> Professional.</span></h1>
+        <p>Specializing in comprehensive testing for your home network and smart devices, we keep you connected and secure. From network security assessments, to smart doorbell installations, we ensure your systems perform flawlessly and securely.</p>
+        <div class="actions">
+          <a class="btn primary" href="#builds">See Featured Builds</a>
+          <a class="btn" href="#services">All Services</a>
+        </div>
+        <div class="tiles container">
+          <div class="grid">
+            <div class="card"><span class="icon">💻</span><h3>Software Testing</h3><p style="color:var(--muted)">Functional, regression, and automated testing to guarantee your software meets all requirements.</p></div>
+            <div class="card"><span class="icon">🌐</span><h3>Network Testing</h3><p style="color:var(--muted)">Evaluate network performance, security, and resilience under real-world conditions.</p></div>
+            <div class="card"><span class="icon">⚡</span><h3>Performance Testing</h3><p style="color:var(--muted)">Stress, load, and scalability testing to ensure your applications can handle peak demand.</p></div>
+            <div class="card"><span class="icon">🛠️</span><h3>PC Building</h3><p style="color:var(--muted)">Custom-built PCs designed for power, performance, and your exact needs — from high-speed gaming rigs to reliable workstations.</p></div>
+            <div class="card"><span class="icon">📊</span><h3>Example Jobs & Rates</h3><p style="color:var(--muted)">
+              Basic PC cleanup / tune-up: $50/hr<br>
+              Virus removal: $60/hr<br>
+              Home Wi-Fi troubleshooting: $55/hr<br>
+              Smart home setup: $60–$75/hr<br>
+              Network setup / router config: $60/hr<br>
+              On-site tech support: $65
+            </p></div>
+            <div class="card"><span class="icon">➕</span><h3>Optional Add-ons</h3><p style="color:var(--muted)">
+              • Monthly service plans (remote support + 1 onsite visit per quarter)<br>
+              • Hardware recommendations and install service packages
+            </p></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- Featured Builds -->
-  <section class="featured container">
-    <h2>Featured Builds</h2>
-    <div class="builds-grid">
-      <!-- Example Build -->
-      <div class="build-card">
+  <section id="builds" class="showcase container">
+    <h2 style="margin:0 0 14px;font-size:32px">Featured Builds</h2>
+    <p style="color:var(--muted);margin:0 0 22px">A few recent rigs. Ask about silent profiles and dust-free routing.</p>
+    <div class="show-grid">
+      <article class="prod">
+  <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1200&auto=format&fit=crop" alt="Clean black PC build with blue accent lighting" />
+  <div class="meta">
+    <h4><a href="pc-builds.html" style="color:inherit;text-decoration:none">Stealth mATX</a></h4>
+    <span class="pill">Air cooled</span>
+  </div>
+</article>
+      </article>
+      <article class="prod">
         <a href="pc-builds.html">
-          <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1200&auto=format&fit=crop" alt="Stealth mATX Build" />
-          <h3>Stealth mATX</h3>
-          <ul>
-            <li>Air cooled</li>
-            <li>Intel Core i7 7700K</li>
-            <li>GTX 980</li>
-          </ul>
-        </a>
-      </div>
+        <img src="https://images.unsplash.com/photo-1541807084-5c52b6b3adef?q=80&w=1200&auto=format&fit=crop" alt="RGB watercooled PC build" />
+        <div class="meta"><h4>Creator 240</h4><span class="pill">240mm AIO</span></div>
+      </article>
+      <article class="prod">
+        <a href="pc-builds.html">
+        <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=1200&auto=format&fit=crop" alt="Compact ITX build" />
+        <div class="meta"><h4>Compact ITX</h4><span class="pill">Small form factor</span></div>
+      </article>
+    </div>
+  </section>
 
-      <div class="build-card">
-        <a href="pc-builds.html">
-          <img src="WhitePC.jpg" alt="Budget Build" />
-          <h3>Budget Build</h3>
-          <ul>
-            <li>ASUS A21 Micro-ATX White</li>
-            <li>Intel Core i7 7700K</li>
-            <li>GTX 980</li>
-          </ul>
-        </a>
-      </div>
+  <!-- Support -->
+  <section id="support" class="support">
+    <div class="container bar">
+      <span>Need help now?</span>
+      <a class="btn primary" href="#contact">Start Support Chat</a>
+    </div>
+  </section>
 
-      <div class="build-card">
-        <a href="pc-builds.html">
-          <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=1200&auto=format&fit=crop" alt="Creator 240" />
-          <h3>Creator 240</h3>
-          <ul>
-            <li>240mm AIO</li>
-            <li>Intel Core i7 7700K</li>
-            <li>GTX 1060</li>
-          </ul>
-        </a>
-      </div>
+  <!-- Contact -->
+  <section id="contact" class="contact-section">
+    <div class="container">
+      <form class="contact-form" action="https://formsubmit.co/carpenterit993@gmail.com" method="POST">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Your full name" required />
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required />
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" placeholder="Write your message here" required></textarea>
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="https://carpenter-it.com/thanks.html">
+        <button type="submit">Send Message</button>
+      </form>
     </div>
   </section>
 
@@ -162,13 +250,13 @@
       </div>
       <div>
         <h5>Company</h5>
-        <a href="index.html#about">About</a>
-        <a href="pc-builds.html">Builds</a>
-        <a href="index.html#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#builds">Builds</a>
+        <a href="#services">Services</a>
       </div>
       <div>
         <h5>Support</h5>
-        <a href="index.html#contact">Contact</a>
+        <a href="#contact">Contact</a>
         <a href="#">Warranty</a>
         <a href="#">FAQ</a>
       </div>
@@ -195,8 +283,25 @@
       menuBtn.setAttribute('aria-expanded', drawer.classList.contains('open'));
     });
 
+    // Scroll reveal
+    const observer = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);}
+      })
+    },{threshold:0.2});
+    document.querySelectorAll('.card,.prod').forEach(el=>observer.observe(el));
+
     // Dynamic year
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
+      anchor.addEventListener("click",function(e){
+        e.preventDefault();
+        document.querySelector(this.getAttribute("href")).scrollIntoView({behavior:"smooth"});
+        closeDrawer();
+      });
+    });
   </script>
 </body>
 </html>
