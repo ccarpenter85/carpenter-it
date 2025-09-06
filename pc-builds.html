@@ -1,80 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Carpenter IT - PC Builds</title>
-<style>
-  body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0b0f12;color:#e7f2f2;margin:0;padding:0;}
-  a{color:#0088FF;text-decoration:none;}
-  .container{max-width:1200px;margin:0 auto;padding:20px;}
-  h1,h2,h3{margin:0 0 12px;}
-  .back-btn{display:inline-block;margin:20px 0;padding:10px 16px;background:#0088FF;color:#0b0f12;font-weight:700;border-radius:8px;}
-  .show-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:20px;}
-  @media(max-width:1024px){.show-grid{grid-template-columns:repeat(2,1fr);}}
-  @media(max-width:640px){.show-grid{grid-template-columns:1fr;}}
-  .prod{position:relative;background:#10161b;border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:all .3s;}
-  .prod img{width:100%;aspect-ratio:16/9;object-fit:cover;}
-  .prod .meta{padding:14px 16px;display:flex;justify-content:space-between;align-items:center;background:#0b0f12;}
-  .prod .pill{font-size:12px;border:1px solid rgba(255,255,255,.12);padding:6px 10px;border-radius:999px;color:#9aa;}
-  .details{background:#10161b;border-radius:16px;padding:20px;margin-top:20px;}
-  .details img{width:100%;border-radius:16px;margin-bottom:20px;}
-  .details ul{list-style:disc inside;margin:0;padding:0;color:#9aa;}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Carpenter IT - PC Builds</title>
+  <meta name="description" content="Carpenter IT — Full list of custom PC builds for gaming, workstations, and more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b0f12;
+      --panel:#10161b;
+      --muted:#9aa;
+      --text:#e7f2f2;
+      --accent:#0088FF;
+      --accent-2:#005FCC;
+      --ring: rgba(0,136,255,0.35);
+      --shadow: 0 10px 25px rgba(0,0,0,.3);
+      --radius: 16px;
+      --radius-lg: 22px;
+      --maxw: 1200px;
+    }
+
+    *{box-sizing:border-box;}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;scroll-behavior:smooth;}
+    img{max-width:100%;display:block;border-radius:var(--radius);}
+    a{color:inherit;text-decoration:none;}
+    .container{max-width:var(--maxw);margin:0 auto;padding:0 20px;}
+
+    /* Header */
+    header{position:sticky;top:0;z-index:50;background:rgba(11,15,18,.8);backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid rgba(255,255,255,.06);}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;height:66px;}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.2px;}
+    .brand img{height:40px;width:auto;}
+    .nav-links{display:flex;gap:22px;align-items:center;}
+    .nav-links a{opacity:.9;transition:all .2s;}
+    .nav-links a:hover{color:var(--accent);}
+    .cta{padding:10px 14px;border-radius:999px;background:linear-gradient(90deg,var(--accent),#39f0ff);color:#0b0f12;font-weight:700;box-shadow:0 0 0 4px var(--ring), var(--shadow);transition:all .25s ease;}
+    .cta:hover{transform:translateY(-2px);filter:brightness(1.1);}
+    .menu-btn{display:none;border:1px solid rgba(255,255,255,.12);padding:8px 12px;border-radius:10px;}
+    @media (max-width:900px){.nav-links{display:none;}.menu-btn{display:inline-flex;gap:8px;align-items:center;}}
+
+    /* Drawer */
+    .drawer{position:fixed;inset:0 0 0 auto;width:min(88vw,380px);background:#0e1419;transform:translateX(102%);transition:transform .25s ease;box-shadow:-30px 0 60px rgba(0,0,0,.45);}
+    .drawer.open{transform:translateX(0);}
+    .drawer .inner{padding:22px;}
+    .drawer a{display:block;padding:14px 10px;border-bottom:1px solid rgba(255,255,255,.06);transition:all .2s;}
+    .drawer a:hover{color:var(--accent);}
+
+    /* Builds Grid */
+    .builds-section{padding:70px 0;}
+    .builds-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+    @media(max-width:1024px){.builds-grid{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:640px){.builds-grid{grid-template-columns:1fr;}}
+    .build-card{background:var(--panel);border-radius:var(--radius);padding:16px;border:1px solid rgba(255,255,255,.06);transition:transform .25s ease, box-shadow .25s ease;}
+    .build-card:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 16px 32px rgba(0,0,0,.45);}
+    .build-card h3{margin:10px 0 6px;}
+    .build-card ul{padding-left:18px;color:var(--muted);margin:0;}
+    .build-card img{height:200px;object-fit:cover;margin-bottom:12px;}
+
+    footer{background:#090c0f;padding:60px 20px;color:var(--muted);margin-top:40px;border-top:2px solid rgba(0,136,255,0.15);}
+    footer .cols{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;}
+    footer h5{margin:0 0 12px;color:var(--text);font-size:16px;font-weight:600;}
+    footer a{display:block;padding:6px 0;color:var(--muted);}
+    footer a:hover{color:var(--accent);}
+    footer p{font-size:14px;line-height:1.6;}
+    @media(max-width:900px){footer .cols{grid-template-columns:1fr 1fr;}}
+    @media(max-width:540px){footer .cols{grid-template-columns:1fr;}}
+  </style>
 </head>
 <body>
-<div class="container">
-  <a class="back-btn" href="index.html">&larr; Back to Main Page</a>
-  <h1>PC Builds</h1>
+  <!-- Header -->
+  <header>
+    <div class="container nav">
+      <a class="brand" href="index.html">
+        <img src="images/LOGO.PNG" alt="Carpenter IT Logo" />
+        Carpenter IT
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#services">Services</a>
+        <a href="pc-builds.html">PC Builds</a>
+        <a href="#support">Support</a>
+        <a class="cta" href="#contact">Get a Quote</a>
+      </nav>
+      <button class="menu-btn" aria-expanded="false" aria-controls="drawer" id="menuBtn">Menu ▾</button>
+    </div>
+  </header>
 
-  <!-- Featured Builds Grid -->
-  <div class="show-grid">
-    <div class="prod">
-      <img src="images/StealthBuild.jpg" alt="Stealth mATX Build">
-      <div class="meta">
-        <h4>Stealth mATX</h4>
-        <span class="pill">Air cooled</span>
-      </div>
+  <aside class="drawer" id="drawer" aria-hidden="true">
+    <div class="inner">
+      <a href="#services" onclick="closeDrawer()">Services</a>
+      <a href="pc-builds.html" onclick="closeDrawer()">PC Builds</a>
+      <a href="#support" onclick="closeDrawer()">Support</a>
+      <a class="cta" href="#contact" onclick="closeDrawer()">Get a Quote</a>
     </div>
-    <div class="prod">
-      <img src="images/Creator240.jpg" alt="Creator 240 Build">
-      <div class="meta">
-        <h4>Creator 240</h4>
-        <span class="pill">240mm AIO</span>
-      </div>
-    </div>
-    <div class="prod">
-      <img src="images/CompactITX.jpg" alt="Compact ITX Build">
-      <div class="meta">
-        <h4>Compact ITX</h4>
-        <span class="pill">Small form factor</span>
-      </div>
-    </div>
-    <div class="prod">
-      <img src="images/WhitePC.jpg" alt="Budget Build">
-      <div class="meta">
-        <h4>Budget Build</h4>
-        <span class="pill">Budget friendly</span>
-      </div>
-    </div>
-  </div>
+  </aside>
 
-  <!-- Budget Build Details -->
-  <div class="details">
-    <h2>Build #2: Budget Build</h2>
-    <img src="WhitePC.jpg" alt="Budget Build Image">
-    <ul>
-      <li>ASUS A21 Micro-ATX Case White Edition</li>
-      <li>ASUS ROG Strix B250G Gaming</li>
-      <li>Intel Core i7 7700K</li>
-      <li>GPU: GTX 980</li>
-      <li>DDR4 RAM 16GB</li>
-      <li>Samsung 500GB M.2 SSD</li>
-      <li>Thermalright Peerless CPU Cooler</li>
-      <li>Thermalright X5 Fan, 120mm</li>
-      <li>Supernova EVGA 850 G2 Power Supply</li>
-    </ul>
-  </div>
-</div>
+  <!-- Builds Section -->
+  <section class="builds-section container">
+    <h1 style="font-size:40px;margin-bottom:14px;">PC Builds</h1>
+    <p style="color:var(--muted);margin-bottom:28px;">Click a build card to see full specs and details.</p>
+    <div class="builds-grid">
+      <!-- Stealth mATX -->
+      <div class="build-card">
+        <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1200&auto=format&fit=crop" alt="Stealth mATX Build" />
+        <h3>Stealth mATX</h3>
+        <ul>
+          <li>Air cooled</li>
+          <li>Custom mATX case</li>
+          <li>Intel Core i7 7700K</li>
+          <li>GPU: GTX 980</li>
+          <li>DDR4 RAM 16GB</li>
+          <li>Samsung 500GB M.2 SSD</li>
+          <li>Thermalright Peerless CPU Cooler</li>
+          <li>Thermalright X5 Fan, 120mm</li>
+          <li>Supernova EVGA 850 G2 Power Supply</li>
+        </ul>
+      </div>
+
+      <!-- Budget Build -->
+      <div class="build-card">
+        <img src="WhitePC.jpg" alt="Budget Build" />
+        <h3>Budget Build</h3>
+        <ul>
+          <li>ASUS A21 Micro-ATX Case White Edition</li>
+          <li>ASUS ROG Strix B250G Gaming</li>
+          <li>Intel Core i7 7700K</li>
+          <li>GPU: GTX 980</li>
+          <li>DDR4 RAM 16GB</li>
+          <li>Samsung 500GB M.2 SSD</li>
+          <li>Thermalright Peerless CPU Cooler</li>
+          <li>Thermalright X5 Fan, 120mm</li>
+          <li>Supernova EVGA 850 G2 Power Supply</li>
+        </ul>
+      </div>
+
+      <!-- Creator 240 -->
+      <div class="build-card">
+        <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=1200&auto=format&fit=crop" alt="Creator 240" />
+        <h3>Creator 240</h3>
+        <ul>
+          <li>240mm AIO</li>
+          <li>Custom black mid-tower case</li>
+          <li>Intel Core i7 7700K</li>
+          <li>GPU: GTX 1060</li>
+          <li>DDR4 RAM 16GB</li>
+          <li>512GB NVMe SSD</li>
+          <li>RGB Cooling Fans</li>
+          <li>Supernova EVGA 850 G2 Power Supply</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container cols">
+      <div>
+        <h5>Carpenter IT</h5>
+        <p>Reliable, Modern, and Professional. Small-business IT without the headache.</p>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <a href="index.html#about">About</a>
+        <a href="pc-builds.html">Builds</a>
+        <a href="index.html#services">Services</a>
+      </div>
+      <div>
+        <h5>Support</h5>
+        <a href="index.html#contact">Contact</a>
+        <a href="#">Warranty</a>
+        <a href="#">FAQ</a>
+      </div>
+      <div>
+        <h5>Legal</h5>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+    <p style="margin-top:24px;text-align:center">© <span id="year"></span> Carpenter IT. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const drawer = document.getElementById('drawer');
+    const menuBtn = document.getElementById('menuBtn');
+    function closeDrawer(){
+      drawer.classList.remove('open');
+      drawer.setAttribute('aria-hidden','true');
+      menuBtn.setAttribute('aria-expanded','false');
+    }
+    menuBtn.addEventListener('click',()=>{
+      drawer.classList.toggle('open');
+      drawer.setAttribute('aria-hidden', drawer.classList.contains('open') ? 'false':'true');
+      menuBtn.setAttribute('aria-expanded', drawer.classList.contains('open'));
+    });
+
+    // Dynamic year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
