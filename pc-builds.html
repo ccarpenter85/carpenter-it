@@ -60,6 +60,10 @@
     .build-card ul{padding-left:18px;color:var(--muted);margin:0;}
     .build-card img{height:200px;object-fit:cover;margin-bottom:12px;}
 
+    /* Back Button */
+    .back-btn{display:inline-block;margin-bottom:24px;padding:10px 16px;background:linear-gradient(90deg,var(--accent),#39f0ff);color:#0b0f12;font-weight:700;border-radius:999px;box-shadow:0 0 0 4px var(--ring), var(--shadow);}
+    .back-btn:hover{filter:brightness(1.1);}
+    
     footer{background:#090c0f;padding:60px 20px;color:var(--muted);margin-top:40px;border-top:2px solid rgba(0,136,255,0.15);}
     footer .cols{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;}
     footer h5{margin:0 0 12px;color:var(--text);font-size:16px;font-weight:600;}
@@ -99,6 +103,7 @@
 
   <!-- Builds Section -->
   <section class="builds-section container">
+    <a href="index.html" class="back-btn">&larr; Back to Home</a>
     <h1 style="font-size:40px;margin-bottom:14px;">PC Builds</h1>
     <p style="color:var(--muted);margin-bottom:28px;">Click a build card to see full specs and details.</p>
     <div class="builds-grid">
