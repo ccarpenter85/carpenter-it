@@ -22,7 +22,6 @@
       --radius-lg: 22px;
       --maxw: 1200px;
     }
-
     *{box-sizing:border-box;}
     html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;scroll-behavior:smooth;}
     img{max-width:100%;display:block;border-radius:var(--radius);}
@@ -43,18 +42,18 @@
     @media (max-width:900px){.nav-links{display:none;}.menu-btn{display:inline-flex;gap:8px;align-items:center;}}
 
     /* Drawer */
-    .drawer{position:fixed;inset:0 0 0 auto;width:min(88vw,380px);background:#0e1419;transform:translateX(102%);transition:transform .25s ease;box-shadow:-30px 0 60px rgba(0,0,0,.45);}
+    .drawer{position:fixed;top:0;right:0;bottom:0;width:min(88vw,380px);background:#0e1419;transform:translateX(102%);transition:transform .25s ease;box-shadow:-30px 0 60px rgba(0,0,0,.45);z-index:9999;}
     .drawer.open{transform:translateX(0);}
     .drawer .inner{padding:22px;}
     .drawer a{display:block;padding:14px 10px;border-bottom:1px solid rgba(255,255,255,.06);transition:all .2s;}
     .drawer a:hover{color:var(--accent);}
 
-    /* Builds Grid */
+    /* Builds Section */
     .builds-section{padding:70px 0;}
     .builds-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
     @media(max-width:1024px){.builds-grid{grid-template-columns:repeat(2,1fr);}}
     @media(max-width:640px){.builds-grid{grid-template-columns:1fr;}}
-    .build-card{background:var(--panel);border-radius:var(--radius);padding:16px;border:1px solid rgba(255,255,255,.06);transition:transform .25s ease, box-shadow .25s ease;display:block;}
+    .build-card{background:var(--panel);border-radius:var(--radius);padding:16px;border:1px solid rgba(255,255,255,.06);transition:transform .25s ease, box-shadow .25s ease;}
     .build-card:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 16px 32px rgba(0,0,0,.45);}
     .build-card h3{margin:10px 0 6px;}
     .build-card ul{padding-left:18px;color:var(--muted);margin:0;}
@@ -78,26 +77,24 @@
   <!-- Header -->
   <header>
     <div class="container nav">
-      <a class="brand" href="index.html">
-        <img src="LOGO.PNG" alt="Carpenter IT Logo" />
-        Carpenter IT
-      </a>
-      <nav class="nav-links" aria-label="Primary">
-        <a href="#index.html#services">Services</a>
+      <a class="brand" href="index.html"><img src="LOGO.PNG" alt="Carpenter IT Logo" /> Carpenter IT</a>
+      <nav class="nav-links">
+        <a href="#services">Services</a>
         <a href="pc-builds.html">PC Builds</a>
         <a href="#support">Support</a>
-        <a class="cta" href="#contact">Get a Quote</a>
       </nav>
+      <a class="cta" href="#contact">Get a Quote</a>
       <button class="menu-btn" aria-expanded="false" aria-controls="drawer" id="menuBtn">Menu ▾</button>
     </div>
   </header>
 
+  <!-- Drawer -->
   <aside class="drawer" id="drawer" aria-hidden="true">
     <div class="inner">
       <a href="#services" onclick="closeDrawer()">Services</a>
       <a href="pc-builds.html" onclick="closeDrawer()">PC Builds</a>
       <a href="#support" onclick="closeDrawer()">Support</a>
-      <a class="cta" href="#contact" onclick="closeDrawer()">Get a Quote</a>
+      <a class="cta" href="#contact" onclick="closeDrawer()" style="margin-top:14px">Get a Quote</a>
     </div>
   </aside>
 
@@ -107,8 +104,8 @@
     <h1 style="font-size:40px;margin-bottom:14px;">PC Builds</h1>
     <p style="color:var(--muted);margin-bottom:28px;">Click a build card to see full specs and details.</p>
     <div class="builds-grid">
-      <!-- Stealth mATX -->
-      <a href="pc-builds.html" class="build-card">
+      <!-- Example Builds -->
+      <div class="build-card">
         <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1200&auto=format&fit=crop" alt="Stealth mATX Build" />
         <h3>Stealth mATX</h3>
         <ul>
@@ -122,10 +119,8 @@
           <li>Thermalright X5 Fan, 120mm</li>
           <li>Supernova EVGA 850 G2 Power Supply</li>
         </ul>
-      </a>
-
-      <!-- Budget Build -->
-      <a href="pc-builds.html" class="build-card">
+      </div>
+      <div class="build-card">
         <img src="WhitePC.jpg" alt="Budget Build" />
         <h3>Budget Build</h3>
         <ul>
@@ -139,10 +134,8 @@
           <li>Thermalright X5 Fan, 120mm</li>
           <li>Supernova EVGA 850 G2 Power Supply</li>
         </ul>
-      </a>
-
-      <!-- Creator 240 -->
-      <a href="pc-builds.html" class="build-card">
+      </div>
+      <div class="build-card">
         <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=1200&auto=format&fit=crop" alt="Creator 240" />
         <h3>Creator 240</h3>
         <ul>
@@ -155,7 +148,7 @@
           <li>RGB Cooling Fans</li>
           <li>Supernova EVGA 850 G2 Power Supply</li>
         </ul>
-      </a>
+      </div>
     </div>
   </section>
 
@@ -174,7 +167,7 @@
       </div>
       <div>
         <h5>Support</h5>
-        <a href="index.html#contact">Contact</a>
+        <a href="#contact">Contact</a>
         <a href="#">Warranty</a>
         <a href="#">FAQ</a>
       </div>
